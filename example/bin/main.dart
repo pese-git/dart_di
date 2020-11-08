@@ -53,13 +53,13 @@ class NetworkDataRepository implements DataRepository {
 }
 
 abstract class ApiClient {
-  Future sendRequest({@required String url, String token, Map requestBody});
+  Future sendRequest({@required String? url, String? token, Map? requestBody});
 }
 
 class ApiClientMock implements ApiClient {
   @override
   Future sendRequest(
-      {@required String url, String token, Map requestBody}) async {
+      {@required String? url, String? token, Map? requestBody}) async {
     return 'hello world';
   }
 }

@@ -6,11 +6,11 @@ import 'package:dart_di/resolvers/value_resolver.dart';
 
 class ResolvingContext<T> extends Resolver {
   /// Корневой резолвер
-  Resolver<T> get resolver => _resolver;
+  Resolver<T> get resolver => _resolver as Resolver<T>;
 
-  DiContainer _container;
+  late DiContainer _container;
 
-  Resolver _resolver;
+  late Resolver _resolver;
 
   ResolvingContext(this._container);
 
@@ -21,7 +21,7 @@ class ResolvingContext<T> extends Resolver {
   @override
   T resolve() {
     _verify();
-    return _resolver?.resolve();
+    return _resolver.resolve();
   }
 
   /**
@@ -38,7 +38,7 @@ class ResolvingContext<T> extends Resolver {
      *  Создать резолвер значения
      */
   ResolvingContext<T> toValue<TImpl extends T>(T value) {
-    Resolver<TImpl> resolver = ValueResolver(value);
+    Resolver<TImpl> resolver = ValueResolver(value as TImpl);
     return toResolver<TImpl>(resolver);
   }
 
