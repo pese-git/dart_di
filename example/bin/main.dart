@@ -7,7 +7,9 @@ void main() async {
     ..bind<ApiClient>().toValue(new ApiClientMock())
     ..bind<DataRepository>()
         .toFactory1<ApiClient>((c) => new NetworkDataRepository(c))
-    ..bind<DataBloc>().toFactory1<DataRepository>((s) => new DataBloc(s));
+        .named("repo")
+    ..bind<DataBloc>()
+        .toFactory1<DataRepository>((s) => new DataBloc(s), named1: 'repo');
 
   final dataBloc = dataModule.resolve<DataBloc>();
   dataBloc.data.listen((d) => print('Received data: $d'),

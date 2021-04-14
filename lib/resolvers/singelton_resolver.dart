@@ -7,7 +7,7 @@ class SingletonResolver<T> extends Resolver<T> {
   SingletonResolver(this._decoratedResolver);
 
   @override
-  T? resolve() {
+  T? resolve({String? named}) {
     if (_value == null) {
       _value = _decoratedResolver.resolve();
     }

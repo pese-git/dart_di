@@ -9,7 +9,7 @@ class ValueResolver<T> extends Resolver<T> {
   ValueResolver(this._value);
 
   @override
-  T resolve() {
+  T resolve({String? named}) {
     return _value;
   }
 }

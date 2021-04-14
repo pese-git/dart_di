@@ -33,8 +33,8 @@ class DiContainer {
      * то используйте вместо этого [tryResolve]
      * @return - возвращает объект типа [T]  или [StateError]
      */
-  T resolve<T>() {
-    var resolved = tryResolve<T>();
+  T resolve<T>({String? named}) {
+    var resolved = tryResolve<T>(named: named);
     if (resolved != null) {
       return resolved;
     } else {
@@ -46,12 +46,12 @@ class DiContainer {
   /**
      * Возвращает разрешенную зависимость типа [T] или null, если она не может быть разрешена.
      */
-  T? tryResolve<T>() {
+  T? tryResolve<T>({String? named}) {
     var resolver = _resolvers[T];
     if (resolver != null) {
-      return resolver.resolve();
+      return resolver.resolve(named: named);
     } else {
-      return _parent?.tryResolve<T>();
+      return _parent?.tryResolve<T>(named: named);
     }
   }
 

@@ -49,6 +49,30 @@ void main() {
       final container = DiContainer();
       expect(container.hasInTree<int>(), false);
     });
+
+    test("Container resolve() returns a not named value from container", () {
+      final expectedValue = 5;
+      final container = DiContainer();
+
+      container
+          .bind<int>()
+          .toResolver(_makeResolver(expectedValue))
+          .named("expectedValue");
+
+      expect(() => container.resolve<int>(), throwsA(isA<StateError>()));
+    });
+
+    test("Container resolve() returns a named value from container", () {
+      final expectedValue = 5;
+      final container = DiContainer();
+
+      container
+          .bind<int>()
+          .toResolver(_makeResolver(expectedValue))
+          .named("expectedValue");
+
+      expect(container.resolve<int>(named: "expectedValue"), expectedValue);
+    });
   });
 
   group('With parent', () {

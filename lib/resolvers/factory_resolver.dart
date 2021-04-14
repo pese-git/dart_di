@@ -9,7 +9,7 @@ class FactoryResolver<T> extends Resolver<T> {
   FactoryResolver(this._factory);
 
   @override
-  T resolve() {
+  T resolve({String? named}) {
     return _factory();
   }
 }
